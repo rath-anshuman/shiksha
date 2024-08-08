@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-yo2+o0&guryv7u#i&vu)c!h5sd40)d7a&6isj%q)_b&s-9h$96
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CORS_ALLOW_ALL_ORIGINS = True
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -17,7 +17,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tadmin.apps.TadminConfig',
+    'corsheaders',
     'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -28,6 +30,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'shiksha.urls'
