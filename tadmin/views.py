@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import JsonResponse
-from .models import Routine,RoutineSerializers
+from .models import Routine,RoutineSerializers,RoutineListSerializer
 
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
@@ -22,6 +22,17 @@ def routine(request):
             return JsonResponse({'New Routine :':serializer.data})
         else :
             return JsonResponse({'message':serializer.errors})
+
+@api_view(['POST'])
+def list_routine(request):
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = RoutineListSerializer(data=data, many=True)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({'New Routine': serializer.data}, status=201)
+        else:
+            return JsonResponse({'message': serializer.errors}, status=400)
 
 
 @api_view(['GET','PUT','DELETE'])
