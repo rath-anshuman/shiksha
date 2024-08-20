@@ -1,6 +1,6 @@
 from django.urls import path,include
 
-from .views import routine,routinedtl,list_routine
+from .views import routine,routinedtl
 
 urlpatterns = [
     path('routine/',routine),
