@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from rest_framework.serializers import ModelSerializer,ListSerializer
+from rest_framework.serializers import ModelSerializer,ListSerializer,Serializer
 
 
 class Routine(models.Model):
@@ -33,9 +33,3 @@ class RoutineSerializers(ModelSerializer):
     class Meta:
         model=Routine
         fields='__all__'
-
-class RoutineListSerializer(ListSerializer):
-    def create(self, validated_data):
-        # Create multiple Routine instances
-        routines = [Routine(**item) for item in validated_data]
-        return Routine.objects.bulk_create(routines)
