@@ -61,12 +61,15 @@ WSGI_APPLICATION = 'shiksha.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'shiksha',
-        'USER': 'ANISH',
-        'PASSWORD': 'rFaih5EKD8Wf',
-        'HOST': 'ep-little-lab-a1d84owp.ap-southeast-1.aws.neon.tech',
+        'NAME': 'verceldb',
+        'USER': 'default',
+        'PASSWORD': 'P53yzQamOTru',
+        'HOST': 'ep-super-bush-a1s94e94-pooler.ap-southeast-1.aws.neon.tech',
         'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
     }
+}
 }
 
 
