@@ -4,6 +4,11 @@ from django.db import models
 from rest_framework.serializers import ModelSerializer,ListSerializer,Serializer
 
 
+class classes(models.Model):
+    active=models.BooleanField(default=True)
+    def __str__(self) :
+        return str(self.active)
+
 class Routine(models.Model):
     DAY_SEL=[
         ('MONDAY','MONDAY'),
@@ -33,3 +38,9 @@ class RoutineSerializers(ModelSerializer):
     class Meta:
         model=Routine
         fields='__all__'
+        
+class classesSerializers(ModelSerializer):
+    class Meta:
+        model=classes
+        fields='__all__'
+

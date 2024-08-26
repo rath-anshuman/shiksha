@@ -1,12 +1,31 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import JsonResponse
-from .models import Routine,RoutineSerializers
+from .models import Routine,RoutineSerializers,classes,classesSerializers
 
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 from rest_framework.response import Response
 
+@api_view(['GET','POST'])
+def classstate(request):
+    if request.method == 'GET':
+        state=get_object_or_404(classes,id=1)
+        value=state.active
+        return JsonResponse({'Class-State :': value})
+    if request.method == 'POST':
+        state=get_object_or_404(classes,id=1)
+        if state.active == True:
+            state.active=False
+            state.save()
+            return JsonResponse({'Class-State :': state.active})
+        if state.active == False:
+            state.active=True
+            state.save()
+            return JsonResponse({'Class-State :': state.active})
+
+
+ 
 @api_view(['GET','POST'])
 def routine(request):
     if request.method == 'GET':
