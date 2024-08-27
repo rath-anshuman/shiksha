@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'tadmin.apps.TadminConfig',
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
 
 ]
 
@@ -61,15 +62,23 @@ WSGI_APPLICATION = 'shiksha.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'verceldb',
-        'USER': 'default',
-        'PASSWORD': 'P53yzQamOTru',
-        'HOST': 'ep-super-bush-a1s94e94-pooler.ap-southeast-1.aws.neon.tech',
-        'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'require',
-    }
-}
+        'NAME': 'postgres',
+        'USER': 'postgres.ffslzlcnfmppvgzpmxnd',
+        'PASSWORD': '3rb8DcTXhi9cbZ*',
+        'HOST': 'aws-0-ap-south-1.pooler.supabase.com',
+        'PORT': '6543',
+},
+#     'two': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'verceldb',
+#         'USER': 'default',
+#         'PASSWORD': 'P53yzQamOTru',
+#         'HOST': 'ep-super-bush-a1s94e94-pooler.ap-southeast-1.aws.neon.tech',
+#         'PORT': '5432',
+#         'OPTIONS': {
+#             'sslmode': 'require',
+#     }
+# }
 }
 
 
@@ -117,3 +126,11 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}

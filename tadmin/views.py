@@ -2,7 +2,9 @@ from django.shortcuts import render,get_object_or_404
 from django.http import JsonResponse
 from .models import Routine,RoutineSerializers,classes,classesSerializers
 
-from rest_framework.decorators import api_view
+
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 from rest_framework.response import Response
@@ -65,3 +67,4 @@ def routinedtl(request,pk):
         rout.delete()
         return JsonResponse(status=status.HTTP_204_NO_CONTENT)
     
+
