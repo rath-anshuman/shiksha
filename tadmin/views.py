@@ -9,20 +9,19 @@ from rest_framework.response import Response
 
 @api_view(['GET','POST'])
 def classstate(request):
+    state=get_object_or_404(classes,id=1)
     if request.method == 'GET':
-        state=get_object_or_404(classes,id=1)
-        value=state.active
-        return JsonResponse({'Class-State :': value})
+        serializer=classesSerializers(state)
+        return JsonResponse(serializer.data)
+    
     if request.method == 'POST':
-        state=get_object_or_404(classes,id=1)
-        if state.active == True:
-            state.active=False
-            state.save()
-            return JsonResponse({'Class-State :': state.active})
-        if state.active == False:
-            state.active=True
-            state.save()
-            return JsonResponse({'Class-State :': state.active})
+        serializer=classesSerializers(state,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        else:
+            return JsonResponse({'message':serializer.errors})
+        
 
 
  
@@ -34,7 +33,6 @@ def routine(request):
         return JsonResponse({'Routine :': serializer.data})
 
     if request.method == 'POST':
-        # json=JSONParser().parse(request)
         serializer = RoutineSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()

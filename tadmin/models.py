@@ -1,13 +1,17 @@
 from django.db import models
 
-# Create your models here.
 from rest_framework.serializers import ModelSerializer,ListSerializer,Serializer
 
-
 class classes(models.Model):
-    active=models.BooleanField(default=True)
+    CLSST=[
+        ('CLASSDAY','CLASSDAY'),
+        ('HOLIDAY','HOLIDAY'),
+        ('EXAMS','EXAMS'),
+        ]
+    class_state =models.CharField(choices=CLSST)
+    
     def __str__(self) :
-        return str(self.active)
+        return str(self.class_state)
 
 class Routine(models.Model):
     DAY_SEL=[
@@ -19,6 +23,7 @@ class Routine(models.Model):
         ('SATURDAY','SATURDAY'),
         ('SUNDAY','SUNDAY'),
         ]
+
     SHIFTS=[
         (1,1),
         (2,2),
@@ -26,6 +31,7 @@ class Routine(models.Model):
         (4,4),
         (5,5),
             ]
+
     sub=models.CharField(max_length=50)
     teacher=models.CharField(max_length=50)
     shift=models.IntegerField(choices=SHIFTS)
@@ -42,5 +48,4 @@ class RoutineSerializers(ModelSerializer):
 class classesSerializers(ModelSerializer):
     class Meta:
         model=classes
-        fields='__all__'
-
+        fields=['class_state']    
