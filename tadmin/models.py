@@ -1,5 +1,4 @@
 from django.db import models
-
 from rest_framework.serializers import ModelSerializer,ListSerializer,Serializer
 
 class classes(models.Model):
@@ -22,7 +21,7 @@ class Routine(models.Model):
         ('FRIDAY','FRIDAY'),
         ('SATURDAY','SATURDAY'),
         ('SUNDAY','SUNDAY'),
-        ]
+    ]
 
     SHIFTS=[
         (1,1),
@@ -30,11 +29,22 @@ class Routine(models.Model):
         (3,3),
         (4,4),
         (5,5),
-            ]
+    ]
 
+    SECTION=[
+        ('A1','A1'),
+        ('A2','A2'),
+        ('B1','B1'),
+        ('B2','B2'),
+        ('C1','C1'),
+        ('C2','C2'),
+    ]
     sub=models.CharField(max_length=50)
     teacher=models.CharField(max_length=50)
+    stime=models.TimeField(default="6:0:0")
+    etime=models.TimeField(default="7:0:0")
     shift=models.IntegerField(choices=SHIFTS)
+    section=models.CharField(choices=SECTION)
     weekday=models.CharField(choices=DAY_SEL)
 
     def __str__(self) :
