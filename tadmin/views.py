@@ -89,5 +89,5 @@ def routine_sec_day(request,sec,day):
         return JsonResponse(status=404)
     if request.method == 'GET':
         srlz=RoutineSerializers(rout,many=True)
-        return JsonResponse({f'Routine/{sec}':srlz.data})
+        return JsonResponse({f'Routine/':srlz.data})
     
