@@ -67,4 +67,27 @@ def routinedtl(request,pk):
         rout.delete()
         return JsonResponse(status=status.HTTP_204_NO_CONTENT)
     
+@api_view(['GET'])
+def routine_sec(request,sec):
+    sec=sec.upper()
+    try:
+        rout = Routine.objects.filter(section=sec)
+    except Routine.DoesNotExist:
+        return JsonResponse(status=404)
+    if request.method == 'GET':
+        srlz=RoutineSerializers(rout,many=True)
+        return JsonResponse({f'Routine/{sec}':srlz.data})
+    
 
+@api_view(['GET'])
+def routine_sec_day(request,sec,day):
+    sec=sec.upper()
+    day=day.upper()
+    try:
+        rout = Routine.objects.filter(section=sec,weekday=day)
+    except Routine.DoesNotExist:
+        return JsonResponse(status=404)
+    if request.method == 'GET':
+        srlz=RoutineSerializers(rout,many=True)
+        return JsonResponse({f'Routine/{sec}':srlz.data})
+    

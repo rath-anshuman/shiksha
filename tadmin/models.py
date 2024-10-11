@@ -41,14 +41,14 @@ class Routine(models.Model):
     ]
     sub=models.CharField(max_length=50)
     teacher=models.CharField(max_length=50)
-    s_time=models.TimeField(default="6:0:0")
-    e_time=models.TimeField(default="7:0:0")
+    # s_time=models.TimeField(default="6:0:0")
+    # e_time=models.TimeField(default="7:0:0")
     shift=models.IntegerField(choices=SHIFTS)
     section=models.CharField(choices=SECTION)
     weekday=models.CharField(choices=DAY_SEL)
 
     def __str__(self) :
-        return str(f'{self.weekday}-{self.shift}-{self.sub}')
+        return str(f'{self.section}-{self.weekday}-{self.shift}-{self.sub}')
 
 class RoutineSerializers(ModelSerializer):
     class Meta:
