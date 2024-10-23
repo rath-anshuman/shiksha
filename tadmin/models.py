@@ -29,7 +29,6 @@ class Routine(models.Model):
         (3,3),
         (4,4),
         (5,5),
-        (5,5),
         (6,6),
         (7,7),
         (8,8),
@@ -45,10 +44,9 @@ class Routine(models.Model):
         ('C1','C1'),
         ('C2','C2'),
     ]
+
     sub=models.CharField(max_length=50)
     teacher=models.CharField(max_length=50)
-    # s_time=models.TimeField(default="6:0:0")
-    # e_time=models.TimeField(default="7:0:0")
     shift=models.IntegerField(choices=SHIFTS)
     section=models.CharField(choices=SECTION)
     weekday=models.CharField(choices=DAY_SEL)
@@ -64,4 +62,4 @@ class RoutineSerializers(ModelSerializer):
 class classesSerializers(ModelSerializer):
     class Meta:
         model=classes
-        fields=['class_state']    
+        fields=['class_state']
